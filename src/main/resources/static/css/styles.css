@@ -653,3 +653,90 @@ body {
   line-height: normal;
   letter-spacing: -0.52px;
 }
+
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal {
+  transition: opacity 0.025s ease-in-out;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-background {
+  background: rgba(0, 0, 0, 0.38);
+  height: 100%;
+  width: 100%;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container {
+  position: absolute;
+  background: white;
+  border-radius: 12px;
+  padding: 60px;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container .title {
+  color: #ff6601;
+  font-family: Pretendard;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  padding: 0px 70px 45px 71px;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container form .input-container {
+  margin-bottom: 25px;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container form .input-container .input-title {
+  text-align: left;
+  color: #151515;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  letter-spacing: 0.203px;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container form .input-container input {
+  width: 100%;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  appearance: none;
+  border-radius: 0;
+  padding: 10px 0;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #ff6601;
+  transition: border 0.25s ease-in-out;
+  color: #151515;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  letter-spacing: 0.091px;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container form .input-container input::placeholder {
+  color: #ccc;
+}
+
+#base-gnb #account-object #account-isAuthenticated-object #signupModal .modal-container form .action-group button {
+  color: #fff;
+  background: #ff6601;
+  width: 100%;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-right: 10px;
+}
