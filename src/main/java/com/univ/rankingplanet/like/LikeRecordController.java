@@ -27,13 +27,14 @@ public class LikeRecordController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             boolean hasLiked = likeRecordService.isLikedByUser(userDetails.getUsername(), boardId);
             int likeCount = boardService.getLikeCount(boardId);
-
             response.put("hasLiked", hasLiked);
             response.put("likeCount", likeCount);
 
             return ResponseEntity.ok().body(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            int likeCount = boardService.getLikeCount(boardId);
+            response.put("likeCount", likeCount);
+            return ResponseEntity.ok().body(response);
         }
     }
 }

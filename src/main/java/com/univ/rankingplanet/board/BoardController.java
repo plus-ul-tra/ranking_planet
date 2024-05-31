@@ -100,6 +100,8 @@ public class BoardController {
         List<Comment> commentList = commentRepository.findAllByBoardId(board.getId());
         model.addAttribute("commentList", commentList);
 
+
+
         if(board.getVoteProgress() == 2){ // 투표가 끝난 경우의 페이지 리턴
             List<Vote> votesWithMaxCount = voteService.getVotesWithMaxCountByBoardId(id);
             model.addAttribute("votesWithMaxCount", votesWithMaxCount);

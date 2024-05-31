@@ -1,0 +1,6 @@
+<div th:fragment="components-header-searchbar" id="search-container">
+  <form th:action="@{/board/search}" method="get">
+    <input type="text" name="keyword" placeholder="검색하고 싶은 내용을 입력해주세요.." />
+    <button type="submit"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12.5C6 8.91015 8.91015 6 12.5 6C16.0899 6 19 8.91015 19 12.5C19 16.0899 16.0899 19 12.5 19C8.91015 19 6 16.0899 6 12.5ZM12.5 4C7.80558 4 4 7.80558 4 12.5C4 17.1944 7.80558 21 12.5 21C14.5006 21 16.3399 20.3088 17.7919 19.1522C17.836 19.2314 17.8916 19.3059 17.9589 19.3731L22.9589 24.3731C23.3494 24.7636 23.9826 24.7636 24.3731 24.3731C24.7636 23.9826 24.7636 23.3494 24.3731 22.9589L19.3731 17.9589C19.3059 17.8916 19.2314 17.836 19.1522 17.7919C20.3088 16.3399 21 14.5006 21 12.5C21 7.80558 17.1944 4 12.5 4Z" fill="#FF9E40"></path></svg></button>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+<div th:fragment="components-gnb-category" id="category-object">
+  <a
+    th:each="category : ${T(com.univ.rankingplanet.board.BoardCategory).values()}"
+    th:href="@{'/board/list/' + ${category.displayName}}"
+    th:text="${category.displayName}"
+    class="category" >
+  </a>
+</div>

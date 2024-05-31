@@ -1,0 +1,610 @@
+body {
+  margin: 0;
+}
+
+#base-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#base-header #logo-container {
+  margin-right: 80px;
+  display: inline;
+}
+#base-header #logo-container .text {
+  color: #ff6601;
+  font-family: Pretendard;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+#base-header #search-container {
+  width: 600px;
+  border: 2px solid #ff6601;
+  position: relative;
+  height: 56px;
+  padding: 2px;
+  border-radius: 8px;
+  background-size: 100% 56px;
+  box-sizing: border-box;
+}
+#base-header #search-container form {
+  height: 52px;
+  padding-top: 10px;
+  border-radius: 26px;
+  background: var(--bg-slot);
+  box-sizing: border-box;
+}
+#base-header #search-container form input {
+  color: #181818;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  padding: 0 70px 0 15px;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 26px;
+  border: 0 none;
+  background: none;
+  outline: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+  caret-color: var(--text-primary);
+}
+#base-header #search-container form button {
+  border: none;
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  height: 54px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+#base-gnb {
+  display: flex;
+  padding: 0 20px;
+  background: #ff6601;
+  align-items: center;
+  justify-content: space-between;
+}
+#base-gnb #category-object {
+  display: flex;
+}
+#base-gnb #category-object a {
+  color: #fbfbfb;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  text-decoration: none;
+  padding: 12px;
+  transition: background 0.3s ease-in-out;
+}
+#base-gnb #category-object a:hover {
+  background: rgba(0, 0, 0, 0.3921568627);
+}
+#base-gnb #account-object #account-profile-object #logoutModal {
+  transition: opacity 0.025s ease-in-out;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-background {
+  background: rgba(0, 0, 0, 0.3803921569);
+  height: 100%;
+  width: 100%;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container {
+  position: absolute;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container p {
+  padding: 0 50px;
+  color: #121212;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  margin: 0;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container .hr {
+  margin: 20px 0;
+  height: 1px;
+  background: #e4e4e4;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container .button-group {
+  display: flex;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container .button-group button {
+  background: rgba(188, 188, 188, 0.16);
+  color: #737373;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container .button-group a {
+  background: rgba(255, 146, 16, 0.16);
+  color: #FF9210;
+}
+#base-gnb #account-object #account-profile-object #logoutModal .modal-container .button-group a, #base-gnb #account-object #account-profile-object #logoutModal .modal-container .button-group button {
+  width: 100%;
+  text-decoration: none;
+  border-radius: 16px;
+  margin-right: 10px;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 13px 13px;
+  border: none;
+}
+#base-gnb #account-object #account-isAuthenticated-object .goLogin {
+  color: #fbfbfb;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  text-decoration: none;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal {
+  transition: opacity 0.025s ease-in-out;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-background {
+  background: rgba(0, 0, 0, 0.3803921569);
+  height: 100%;
+  width: 100%;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container {
+  position: absolute;
+  background: white;
+  border-radius: 12px;
+  padding: 60px;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container .title {
+  color: #ff6601;
+  font-family: Pretendard;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  padding: 0px 70px 45px 71px;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .input-container {
+  margin-bottom: 25px;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .input-container .input-title {
+  text-align: left;
+  color: #151515;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  letter-spacing: 0.203px;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .input-container input {
+  width: 100%;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  appearance: none;
+  border-radius: 0;
+  padding: 10px 0;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #ff6601;
+  transition: 0.25s border ease-in-out;
+  color: #151515;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  letter-spacing: 0.091px;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .input-container input::placeholder {
+  color: #ccc;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  letter-spacing: 0.091px;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .action-group button {
+  color: #fff;
+  background: #ff6601;
+  width: 100%;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 13px 13px;
+  border: none;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .action-group .go-signup {
+  margin-top: 14px;
+  color: #cbcbcb;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 142.9%;
+  letter-spacing: 0.203px;
+  text-align: center;
+}
+#base-gnb #account-object #account-isAuthenticated-object #loginModal .modal-container form .action-group .go-signup a {
+  text-decoration: none;
+  font-feature-settings: "ss10" on;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142.9%;
+  letter-spacing: 0.203px;
+  text-align: center;
+  margin-left: 5px;
+  color: #2a2a2a;
+}
+
+#ad-container {
+  width: 150px;
+  height: 300px;
+  background: linear-gradient(134deg, rgb(255, 102, 1) 0%, rgb(255, 226, 208) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#ad-container .text {
+  color: #ffffff;
+  font-family: Pretendard;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+#ad-container .sub {
+  color: #020202;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+
+.switch-view {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.switch-view .MODULE {
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+  margin: 0 20px;
+  background: #fffcfa;
+  border: 0.5px solid #e9e9e9;
+}
+.switch-view .MODULE .header-group {
+  display: flex;
+  align-items: center;
+}
+.switch-view .MODULE .header-group .title {
+  color: #ff6601;
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+.switch-view .MODULE .header-group .sub {
+  margin-left: 15px;
+  color: #c3c3c3;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+
+#all-article ul {
+  list-style-type: none;
+  padding: 0;
+}
+#all-article li {
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+#all-article li:hover {
+  background-color: #f0f0f0;
+}
+#all-article span {
+  color: #c3c3c3;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+#all-article a {
+  color: #181818;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: block;
+  text-decoration: none;
+  margin-top: 7px;
+}
+#all-article a:hover {
+  text-decoration: underline;
+}
+
+#read-article .header-area {
+  display: flex;
+  justify-content: space-between;
+}
+#read-article .header-area .text .article-title {
+  color: #2e2e2e;
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  display: inline;
+}
+#read-article .header-area .text .article-createAt {
+  color: #c3c3c3;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  margin-top: 5px;
+}
+#read-article .header-area .count .view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#read-article .header-area .count .view span {
+  color: rgb(81, 81, 81);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  margin-left: 4px;
+}
+#read-article .header-area .count .like {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#read-article .header-area .count .like .like-count {
+  color: rgb(81, 81, 81);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  margin-left: 4px;
+}
+#read-article .header-area .count .like button {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+}
+#read-article .content-area p {
+  color: #161616;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}
+#read-article #vote-info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+#read-article #vote-info .title {
+  color: #2e2e2e;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}
+#read-article #vote-info .date-info {
+  display: flex;
+  color: #c3c3c3;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}
+#read-article form .table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#read-article form .table th, #read-article form .table td {
+  color: #151515;
+  font-family: Pretendard;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  border: 1px solid #ddd;
+  padding: 17px;
+  text-align: center;
+}
+#read-article form .table th {
+  background-color: #f2f2f2;
+}
+#read-article form .table tr {
+  transition: background 0.25s ease-in-out, color 0.25s ease-in-out, font-size 0.25s ease-in-out, font-weight 0.25s ease-in-out;
+}
+#read-article form .table tr:hover {
+  background-color: #ffe7d8;
+  cursor: pointer;
+}
+#read-article form .selected-vote {
+  font-weight: 600;
+  background-color: #ff7224 !important;
+  color: white;
+  font-size: 22px;
+}
+#read-article form .custom-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+#read-article form .custom-btn:hover {
+  background-color: #45a049;
+}
+#read-article form img {
+  max-width: 100px;
+  max-height: 100px;
+}
+#read-article form #submit-area {
+  margin-top: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#read-article form #submit-area button {
+  cursor: pointer;
+  color: #fff;
+  background: #ff6601;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 13px 13px;
+  border: none;
+  transition: background 0.25s ease-in-out;
+}
+#read-article form #submit-area button:hover {
+  background: #d05503;
+}
+#read-article #comment-area .input-area .header {
+  display: flex;
+}
+#read-article #comment-area .input-area .header .title {
+  margin-left: 8px;
+  color: #2e2e2e;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}
+#read-article #comment-area #commentForm {
+  display: flex;
+  margin: 20px 0;
+}
+#read-article #comment-area #commentForm textarea {
+  width: calc(100% - 125px);
+  resize: none;
+  color: #161616;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+  padding: 20px;
+}
+#read-article #comment-area #commentForm button {
+  cursor: pointer;
+  color: #fff;
+  background: #ff6601;
+  text-decoration: none;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 13px 13px;
+  border: none;
+  transition: background 0.25s ease-in-out;
+}
+#read-article #comment-area #commentForm button:hover {
+  background: #d05503;
+}

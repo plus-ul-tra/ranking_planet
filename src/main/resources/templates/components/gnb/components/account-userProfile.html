@@ -1,0 +1,31 @@
+<div th:fragment="components-gnb-account-profile" id="account-profile-object">
+  <span th:if="${#authorization.expression('isAuthenticated()')}" th:text="'안녕하세요, ' + ${#authentication.principal.username} + '님'" href="#" onclick="showLogoutModal()"></span>
+  <div th:if="${#authorization.expression('isAuthenticated()')}" id="logoutModal" style="opacity: 0; pointer-events: none;">
+    <div class="modal-background" onclick="hideLogoutModal()"></div>
+    <div class="modal-container">
+      <p>로그아웃하시겠습니까?</p>
+      <div class="hr"></div>
+      <div class="button-group">
+        <a th:href="@{/user/logout}">로그아웃</a>
+        <button onclick="hideLogoutModal()">취소</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showLogoutModal() {
+      var modal = document.getElementById("logoutModal");
+      modal.style.opacity = "1";
+      modal.style.pointerEvents = "auto"; // 이벤트 허용
+    }
+  
+    function hideLogoutModal() {
+      var modal = document.getElementById("logoutModal");
+      modal.style.opacity = "0";
+      modal.style.pointerEvents = "none"; // 이벤트 차단
+    }
+  </script>  
+</div>
+
+
+
+

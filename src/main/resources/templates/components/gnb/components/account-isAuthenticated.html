@@ -1,0 +1,42 @@
+<div th:fragment="components-gnb-account-isAuthenticated" id="account-isAuthenticated-object">
+  <span type="button" class="goLogin" data-toggle="modal" data-target="#loginModal" sec:authorize="!isAuthenticated()" onclick="showLoginModal()">로그인하기</span>
+  <div id="loginModal" style="opacity: 0; pointer-events: none;">
+    <div class="modal-background" onclick="hideLoginModal()"></div>
+    <div class="modal-container">
+      <div class="title">랭킹별</div>
+
+      <form th:action="@{/user/login}" method="post">
+
+        <div class="input-container">
+          <div class="input-title">아이디</div>
+          <input type="text" name="username" id="username" class="form-control" placeholder="아이디를 입력하세요.">
+        </div>
+
+        <div class="input-container">
+        <div class="input-title">비밀번호</div>
+          <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력하세요.">
+        </div>
+
+        <div class="action-group">
+          <button type="submit">로그인</button>
+          <div class="go-signup">계정이 없으신가요? <a th:href="@{/user/signup}">회원가입</a></div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <script>
+    function showLoginModal() {
+      var modal = document.getElementById("loginModal");
+      modal.style.opacity = "1";
+      modal.style.pointerEvents = "auto"; // 이벤트 허용
+    }
+  
+    function hideLoginModal() {
+      var modal = document.getElementById("loginModal");
+      modal.style.opacity = "0";
+      modal.style.pointerEvents = "none"; // 이벤트 차단
+    }
+  </script>  
+</div>
+  
