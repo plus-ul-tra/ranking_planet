@@ -608,3 +608,47 @@ body {
 #read-article #comment-area #commentForm button:hover {
   background: #d05503;
 }
+#read-article #comment-area .object-view {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#read-article #comment-area .object-view .comment {
+  background: white;
+  border: 1px solid #dbdbdb;
+}
+#read-article #comment-area .object-view .comment .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  background: #ffc6a0;
+}
+#read-article #comment-area .object-view .comment .header .name {
+  color: #303030;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}
+#read-article #comment-area .object-view .comment .header .date {
+  color: #474747;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}
+#read-article #comment-area .object-view .comment .text p {
+  padding: 10px 20px;
+  color: #161616;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.52px;
+}

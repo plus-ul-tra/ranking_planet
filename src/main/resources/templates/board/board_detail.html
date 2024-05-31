@@ -790,6 +790,17 @@
                     <button id="commentSend">댓글 작성</button>
                 </form>
             </div>
+            <div class="object-view">
+                <div th:each="comment : ${commentList}" class="comment">
+                    <div class="header">
+                        <span class="name" th:text="${comment.userId}"></span>
+                        <span class="date" th:text="${comment.createdAt}"></span>
+                    </div>
+                    <div class="text">
+                        <p th:text="${comment.content}"></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
