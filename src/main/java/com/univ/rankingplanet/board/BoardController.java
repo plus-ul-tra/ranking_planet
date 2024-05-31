@@ -65,6 +65,7 @@ public class BoardController {
     public String searchBoard(@RequestParam String keyword, Pageable pageable, Model model) {
         List<Board> searchBoardListResult = boardRepository.findByBoardTitleContainingOrCategoryContaining(keyword, keyword, pageable);
         model.addAttribute("boardList", searchBoardListResult);
+        model.addAttribute("keyword", keyword);
         return "board/search_board_list";
     }
 
