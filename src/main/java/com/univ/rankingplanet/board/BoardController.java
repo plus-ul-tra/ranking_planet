@@ -150,7 +150,6 @@ public class BoardController {
 
     @PostMapping("/board/update/{boardId}")
     public ResponseEntity<Long> updateBoard(@Valid @RequestBody BoardCreateForm boardCreateForm, @PathVariable Long boardId ,BindingResult bindingResult,Authentication authentication){
-        System.out.println("hi");
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(null);
         }
@@ -163,9 +162,6 @@ public class BoardController {
 
     @GetMapping(value = "/board/list/{category}")
     public String boardList(@PathVariable String category, @RequestParam(name="criteria",defaultValue="all") String criteria, Model model){
-//        List<Board> boardList = boardService.getBoardListByCategory(category);
-        System.out.println("1" + category);
-        System.out.println("2" + criteria);
         List<Board> boardList = null;
         boardList = boardService.getBoardsByCategoryAndOrderByCriteria(criteria, category);
         model.addAttribute("category", category);
