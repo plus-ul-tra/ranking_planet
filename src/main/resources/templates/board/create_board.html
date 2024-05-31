@@ -1,64 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랭킹별</title>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
-    <style>
-        #voteForm {
-            display: none; /* 기본적으로 숨김 */
-        }
-        .poll-item {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
-<form th:action="@{/board/create}" th:object="${boardCreateForm}" method="post">
-    <label for="boardTitle">게시판 제목:</label>
-    <div>
-        <label for="category">Category:</label>
-        <select id="category" name="category">
-            <option th:each="category : ${T(com.univ.rankingplanet.board.BoardCategory).values()}"
-                    th:value="${category.displayName}"
-                    th:text="${category.displayName}"></option>
-        </select>
-    </div>
-    <input type="text" id="boardTitle" th:field="*{boardTitle}" placeholder="투표 제목을 입력하세요">
-    <div id="editor"></div>
-    <input type="hidden" id="quill_html" name="content" th:field="*{boardContent}">
-    <input type="checkbox" id="voteFlag" th:field="*{voteFlag}">
-    <label for="voteFlag">투표 추가하기</label>
-    <input type="hidden" id="voteFlagHidden" name="voteFlagHidden" th:field="*{voteFlag}">
+<div th:replace="~{layout/base-header :: base-header}"></div>
+<div th:replace="~{layout/base-gnb :: base-gnb}"></div>
 
-    <!-- 투표 생성 양식 -->
-    <div id="voteForm">
-        <label for="voteTitle">투표 제목:</label>
-        <input type="text" id="voteTitle" placeholder="투표 제목을 입력하세요">
-        <div>
-            <label for="voteEnd">투표 마감 날짜 (yyyy-MM-ddTHH:mm:ss):</label>
-            <input type="datetime-local" id="voteEnd" name="voteEnd" required/>
-        </div>
-            <div id="voteItems">
-            <!-- 투표 항목을 동적으로 추가할 공간 -->
-        </div>
-        <button type="button" onclick="addVoteItem()">항목 추가</button>
-    </div>
+<div class="switch-view">
+    <div th:replace="~{components/ads/ad-screen :: components-ads-adscreen}"></div>
 
-    <button type="button" id="getContentsButton">게시글 등록하기</button>
-</form>
+    <div id="update-article" class="MODULE">
+        <form th:action="@{/board/create}" th:object="${boardCreateForm}" method="post">
+            <div class="default-info">
+                <input type="text" id="boardTitle" th:field="*{boardTitle}" placeholder="투표 제목을 입력하세요">
+                <div class="select-category-group">
+                    <label for="category">카테고리 : </label>
+                    <select id="category" name="category">
+                        <option th:each="category : ${T(com.univ.rankingplanet.board.BoardCategory).values()}"
+                                th:value="${category.displayName}" th:text="${category.displayName}"
+                        ></option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="editor"></div>
+            <input type="hidden" id="quill_html" name="content" th:field="*{boardContent}">
+
+            <div class="vote-switch">
+                <input type="checkbox" id="voteFlag" th:checked="*{voteFlag}">
+                <label for="voteFlag">
+                    <span>투표 추가하기</span>
+                </label>
+            </div>
+            <input type="hidden" id="voteFlagHidden" name="voteFlagHidden" th:field="*{voteFlag}">
+
+
+            <!-- 투표 생성 양식 -->
+            <div id="voteForm" style="display:none;">
+                <div class="title-edit">
+                    <label for="voteTitle">투표 제목 :</label>
+                    <input type="text" id="voteTitle" placeholder="투표 제목을 입력하세요">
+                </div>
+                <div class="date-edit">
+                    <label for="voteEnd">투표 마감 날짜 :</label>
+                    <input type="datetime-local" id="voteEnd" name="voteEnd" required />
+                </div>
+                <div id="voteItems"></div>
+                <div class="more-area">
+                    <div class="more-item" onclick="addVoteItem()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 6L12 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18 12L6 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="article-edit-done-area">
+                <button type="submit"  id="getContentsButton">게시글 등록하기</button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{components/ads/ad-screen :: components-ads-adscreen}"></div>
+</div>
+</body>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+
+    var quill;
     function quilljsediterInit() {
         var option = {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
                     ['link', 'image', 'video', 'formula'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+                    [{ 'indent': '-1' }, { 'indent': '+1' }],
                     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                     [{ 'color': [] }, { 'background': [] }],
@@ -71,22 +96,21 @@
         };
 
         quill = new Quill('#editor', option);
-        quill.on('text-change', function() {
+        var boardContent = document.getElementById("quill_html").value;
+        quill.root.innerHTML = boardContent;
+        quill.on('text-change', function () {
             document.getElementById("quill_html").value = quill.root.innerHTML;
         });
 
         quill.getModule('toolbar').addHandler('image', function () {
             selectLocalImage();
         });
-        quill.setText('');
     }
 
     function selectLocalImage() {
         const fileInput = document.createElement('input');
         fileInput.setAttribute('type', 'file');
-
         fileInput.click();
-
         fileInput.addEventListener("change", function () {
             const formData = new FormData();
             const file = fileInput.files[0];
@@ -116,6 +140,11 @@
 
     function addVoteItem() {
         var voteItems = document.getElementById("voteItems");
+        if (!voteItems) {
+            voteItems = document.createElement("div");
+            voteItems.id = "voteItems";
+            document.getElementById("voteForm").appendChild(voteItems);
+        }
 
         var itemDiv = document.createElement("div");
         itemDiv.classList.add("poll-item");
@@ -143,13 +172,21 @@
         voteItems.appendChild(itemDiv);
     }
 
+    function removeVoteItem(button) {
+        var pollItem = button.closest(".poll-item");
+        if (pollItem) {
+            pollItem.parentNode.removeChild(pollItem);
+        } else {
+            console.error("Failed to find the poll-item to remove.");
+        }
+    }
 
-    document.getElementById("voteFlag").addEventListener("change", function() {
+    document.getElementById("voteFlag").addEventListener("change", function () {
         var voteFlagHidden = document.getElementById("voteFlagHidden");
         voteFlagHidden.value = this.checked;
-        if(voteFlagHidden.value === 'true'){
+        if (voteFlagHidden.value === 'true') {
             document.getElementById("voteForm").style.display = "block";
-        }else{
+        } else {
             document.getElementById("voteForm").style.display = "none";
         }
     });
@@ -204,7 +241,6 @@
             }
         });
     }
-
     function sendVoteItemsToServer(boardId) {
         var formData = new FormData();
         var voteItems = document.querySelectorAll(".poll-item");
@@ -237,7 +273,6 @@
         });
     }
 
-    // 버튼 클릭 이벤트 리스너
     document.getElementById("getContentsButton").addEventListener("click", function(event) {
         event.preventDefault();
         var voteFlagValue = document.getElementById("voteFlagHidden").value;
@@ -249,4 +284,5 @@
     });
 </script>
 </body>
+
 </html>

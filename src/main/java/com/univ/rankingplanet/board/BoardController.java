@@ -150,6 +150,7 @@ public class BoardController {
 
     @PostMapping("/board/update/{boardId}")
     public ResponseEntity<Long> updateBoard(@Valid @RequestBody BoardCreateForm boardCreateForm, @PathVariable Long boardId ,BindingResult bindingResult,Authentication authentication){
+        System.out.println("hi");
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(null);
         }

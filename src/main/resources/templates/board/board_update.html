@@ -1,61 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>게시판 수정</title>
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet"/>
-    <style>
-        #voteForm {
-            display: none; /* 기본적으로 숨김 */
-        }
-        .poll-item {
-            margin-bottom: 10px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랭킹별</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
-<form th:action="@{/board/update/{id}(id=${board.id})}" method="post">
-    <label for="boardTitle">게시판 제목:</label>
-    <input type="text" id="boardTitle" th:value="${board.boardTitle}" placeholder="투표 제목을 입력하세요">
-    <input type="hidden" id="boardId" th:value="${board.id}">
-    <div>
-        <label for="category">Category:</label>
-        <select id="category" name="category">
-            <option th:each="category : ${T(com.univ.rankingplanet.board.BoardCategory).values()}"
-                    th:value="${category.displayName}"
-                    th:text="${category.displayName}"
-                    th:selected="${board.category == category.displayName}"></option>
-        </select>
-    </div>
+<div th:replace="~{layout/base-header :: base-header}"></div>
+<div th:replace="~{layout/base-gnb :: base-gnb}"></div>
 
-    <div id="editor"></div>
-    <input type="hidden" id="quill_html" name="boardContent" th:value="${board.boardContent}">
+<div class="switch-view">
+    <div th:replace="~{components/ads/ad-screen :: components-ads-adscreen}"></div>
 
-    <input type="checkbox" id="voteFlag" th:checked="${board.voteFlag}">
-    <label for="voteFlag">투표 추가하기</label>
-    <input type="hidden" id="voteFlagHidden" name="voteFlagHidden" th:value="${board.voteFlag}">
-
-    <!-- 투표 생성 양식 -->
-    <div id="voteForm">
-        <label for="voteTitle">투표 제목:</label>
-        <input type="text" id="voteTitle" th:value="${board.voteTitle}" placeholder="투표 제목을 입력하세요">
-        <div>
-            <label for="voteEnd">투표 마감 날짜 (yyyy-MM-ddTHH:mm:ss):</label>
-            <input type="datetime-local" id="voteEnd" name="voteEnd" th:value="${voteEnd}" required/>
-        </div>
-        <div id="voteItems" th:each="vote : ${voteList}">
-            <div class="poll-item">
-                <input type="hidden" class="poll-voteId" th:value="${vote.id}">
-                <input type="file" class="poll-image" th:src="${vote.imagePath}">
-                <input type="text" class="poll-text" th:value="${vote.text}" placeholder="투표 항목을 입력하세요">
-                <button type="button" onclick="removeVoteItem(this)">삭제</button>
+    <div id="update-article" class="MODULE">
+        <form th:action="@{/board/update/{id}(id=${board.id})}" method="post">
+            <div class="default-info"><input type="hidden" id="boardId" th:value="${board.id}">
+                <input type="text" id="boardTitle" th:value="${board.boardTitle}" placeholder="투표 제목을 입력하세요">
+                <div class="select-category-group">
+                    <label for="category">카테고리 : </label>
+                    <select id="category" name="category">
+                        <option th:each="category : ${T(com.univ.rankingplanet.board.BoardCategory).values()}"
+                                th:value="${category.displayName}" th:text="${category.displayName}"
+                                th:selected="${board.category == category.displayName}"></option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <button type="button" onclick="addVoteItem()">항목 추가</button>
-    </div>
 
-    <button type="button" id="updateContentsButton">게시글 수정하기</button>
-</form>
+            <div id="editor"></div>
+            <input type="hidden" id="quill_html" name="boardContent" th:value="${board.boardContent}">
+
+            <div class="vote-switch">
+                <input type="checkbox" id="voteFlag" th:checked="${board.voteFlag}">
+                <label for="voteFlag">
+                    <span>투표 추가하기</span>
+                </label>
+            </div>
+
+            <input type="hidden" id="voteFlagHidden" name="voteFlagHidden" th:value="${board.voteFlag}">
+
+            <!-- 투표 생성 양식 -->
+            <div id="voteForm">
+                <div class="title-edit">
+                    <label for="voteTitle">투표 제목 :</label>
+                    <input type="text" id="voteTitle" th:value="${board.voteTitle}" placeholder="투표 제목을 입력하세요">
+                </div>
+                <div class="date-edit">
+                    <label for="voteEnd">투표 마감 날짜 :</label>
+                    <input type="datetime-local" id="voteEnd" name="voteEnd" th:value="${voteEnd}" required />
+                </div>
+                <div id="voteItems" th:each="vote : ${voteList}">
+                    <div class="poll-item">
+                        <input type="hidden" class="poll-voteId" th:value="${vote.id}">
+                        <input type="file" class="poll-image" th:src="${vote.imagePath}">
+                        <input type="text" class="poll-text" th:value="${vote.text}" placeholder="투표 항목을 입력하세요">
+                        <div type="button" onclick="removeVoteItem(this)">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18" stroke="#33363F" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                <path d="M6 6L18 18" stroke="#33363F" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-area">
+                    <div class="more-item" onclick="addVoteItem()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 6L12 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18 12L6 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="article-edit-done-area">
+                <button type="submit"  id="updateContentsButton">게시글 수정하기</button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{components/ads/ad-screen :: components-ads-adscreen}"></div>
+</div>
+</body>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -67,8 +96,8 @@
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
                     ['link', 'image', 'video', 'formula'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+                    [{ 'indent': '-1' }, { 'indent': '+1' }],
                     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                     [{ 'color': [] }, { 'background': [] }],
@@ -83,7 +112,7 @@
         quill = new Quill('#editor', option);
         var boardContent = document.getElementById("quill_html").value;
         quill.root.innerHTML = boardContent;
-        quill.on('text-change', function() {
+        quill.on('text-change', function () {
             document.getElementById("quill_html").value = quill.root.innerHTML;
         });
 
@@ -125,6 +154,11 @@
 
     function addVoteItem() {
         var voteItems = document.getElementById("voteItems");
+        if (!voteItems) {
+            voteItems = document.createElement("div");
+            voteItems.id = "voteItems";
+            document.getElementById("voteForm").appendChild(voteItems);
+        }
 
         var itemDiv = document.createElement("div");
         itemDiv.classList.add("poll-item");
@@ -153,16 +187,20 @@
     }
 
     function removeVoteItem(button) {
-        var voteItems = document.getElementById("voteItems");
-        voteItems.removeChild(button.parentNode);
+        var pollItem = button.closest(".poll-item");
+        if (pollItem) {
+            pollItem.parentNode.removeChild(pollItem);
+        } else {
+            console.error("Failed to find the poll-item to remove.");
+        }
     }
 
-    document.getElementById("voteFlag").addEventListener("change", function() {
+    document.getElementById("voteFlag").addEventListener("change", function () {
         var voteFlagHidden = document.getElementById("voteFlagHidden");
         voteFlagHidden.value = this.checked;
-        if(voteFlagHidden.value === 'true'){
+        if (voteFlagHidden.value === 'true') {
             document.getElementById("voteForm").style.display = "block";
-        }else{
+        } else {
             document.getElementById("voteForm").style.display = "none";
         }
     });
@@ -189,41 +227,37 @@
         };
 
         $.ajax({
-            type: 'post',
+            type: 'POST',
             url: '/board/update/' + document.getElementById("boardId").value,
             contentType: 'application/json',
             data: JSON.stringify(boardData),
-            success: function(boardId) {
+            success: function (boardId) {
                 if (boardData.voteFlag === 'true') {
                     sendVoteItemsToServer(boardId);
                 } else {
                     window.location.href = '/board/detail/' + boardId;
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error("게시판 수정 중 오류가 발생했습니다.");
             }
         });
     }
 
+
     function sendVoteItemsToServer(boardId) {
         var formData = new FormData();
-        var voteItems = document.querySelectorAll(".poll-item");
 
-        voteItems.forEach(function(item) {
+        var voteElements = document.querySelectorAll(".poll-item");
+
+        voteElements.forEach(function (item) {
             var imageInput = item.querySelector(".poll-image");
             var textInput = item.querySelector(".poll-text");
-            var voteId = item.querySelector(".poll-voteId");
-            if(voteId == null){
-                voteId = -1;
-                formData.append('voteId', voteId);
-            }else{
-                formData.append('voteId', voteId.value);
-            }
-            if (imageInput.files[0]) {
-                formData.append('images', imageInput.files[0]);
-            }
+            var voteId = item.querySelector(".poll-voteId") ? item.querySelector(".poll-voteId").value : -1;
+
+            formData.append('images', imageInput.files[0]); // 이미지 파일 객체 직접 추가
             formData.append('texts', textInput.value);
+            formData.append('voteId', voteId);
         });
 
         formData.append('boardId', boardId);
@@ -234,30 +268,33 @@
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 window.location.href = '/board/detail/' + boardId;
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error("투표 항목 업데이트 중 오류가 발생했습니다.");
             }
         });
     }
 
-    document.getElementById("updateContentsButton").addEventListener("click", function() {
+
+
+    document.getElementById("updateContentsButton").addEventListener("click", function (event) {
+        event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         sendBoardAndVotes();
     });
 
-    $('#deleteButton').on('click', function() {
+    $('#deleteButton').on('click', function () {
         var boardId = $('input[name="boardId"]').val();
-        if(confirm("게시글을 삭제하시겠습니까?")) {
+        if (confirm("게시글을 삭제하시겠습니까?")) {
             $.ajax({
                 type: 'DELETE',
                 url: '/board/delete/' + boardId,
-                success: function(response) {
+                success: function (response) {
                     alert('게시글이 삭제되었습니다.');
                     window.location.href = '/home.do';
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error(xhr.responseText);
                     alert('게시글 삭제에 실패했습니다.');
                 }
@@ -266,11 +303,12 @@
     });
 
     // 페이지 로드 시 기존 데이터로 폼을 채우기
-    window.onload = function() {
+    window.onload = function () {
         if (document.getElementById("voteFlag").checked) {
             document.getElementById("voteForm").style.display = "block";
         }
     };
 </script>
 </body>
+
 </html>
