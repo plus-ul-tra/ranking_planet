@@ -2,11 +2,10 @@ package com.univ.rankingplanet.board;
 
 public enum BoardCategory {
     ED("전자제품"),
-    IDOL("자동차"),
-    SPORTS("컴퓨터"),
-    MOVIE("여행"),
-    TRIP("아이돌"),
-    POLITICS("정치");
+    CAR("자동차"),
+    RETAURANT("음식"),
+    TRIP("여행"),
+    IDOL("아이돌");
 
 
     private final String displayName;

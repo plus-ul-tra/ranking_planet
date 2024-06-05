@@ -65,4 +65,12 @@ public class VoteService {
     public List<Vote> getVotesWithMaxCountByBoardId(Long boardId) {
         return voteRepository.findVotesWithMaxCountByBoardId(boardId);
     }
+
+    public void updateNewVote(Long boardId, String text, String imagePath, String imageName) {
+
+    }
+
+    public int getLastVoteNumber(Long boardId) {
+        return voteRepository.findLastVoteNumberByBoardId(boardId);
+    }
 }

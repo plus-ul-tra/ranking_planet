@@ -167,11 +167,4 @@ public class Board {
         this.viewCount = viewCount;
     }
 
-    //    public boolean getVoteFlag() {
-//        return voteFlag;
-//    }
-//
-//    public void setVoteFlag(boolean voteFlag) {
-//        this.voteFlag = voteFlag;
-//    }
 }

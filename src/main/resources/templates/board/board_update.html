@@ -52,6 +52,7 @@
                     <label for="voteEnd">투표 마감 날짜 :</label>
                     <input type="datetime-local" id="voteEnd" name="voteEnd" th:value="${voteEnd}" required />
                 </div>
+
                 <div id="voteItems" th:each="vote : ${voteList}">
                     <div class="poll-item">
                         <input type="hidden" class="poll-voteId" th:value="${vote.id}">
@@ -78,7 +79,7 @@
                 </div>
             </div>
             <div class="article-edit-done-area">
-                <button type="submit"  id="updateContentsButton">게시글 수정하기</button>
+                <button id="updateContentsButton">게시글 수정하기</button>
             </div>
         </form>
     </div>
@@ -254,7 +255,9 @@
             var imageInput = item.querySelector(".poll-image");
             var textInput = item.querySelector(".poll-text");
             var voteId = item.querySelector(".poll-voteId") ? item.querySelector(".poll-voteId").value : -1;
-
+            console.log(imageInput.files[0]);
+            console.log(textInput.value);
+            console.log(voteId);
             formData.append('images', imageInput.files[0]); // 이미지 파일 객체 직접 추가
             formData.append('texts', textInput.value);
             formData.append('voteId', voteId);

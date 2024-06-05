@@ -1,5 +1,6 @@
 package com.univ.rankingplanet.board;
 
+
 import com.univ.rankingplanet.comment.Comment;
 import com.univ.rankingplanet.comment.CommentRepository;
 import com.univ.rankingplanet.login.UserCreateForm;
@@ -258,8 +259,8 @@ public class BoardController {
             String text = texts.get(i);
             MultipartFile image = (uploadFile.size() > i) ? uploadFile.get(i) : null;
             // 이미지 저장 처리
-            if(voteId.get(i) != -1){
-                if (image != null && !image.isEmpty()) {
+            if (image != null && !image.isEmpty()) {
+                if (voteId.get(i) != -1) {
                     try {
                         // 이미지를 저장할 경로 설정
                         String uploadDir = "/Users/pms327/Downloads/image"; // 이미지를 저장할 실제 경로로 변경해야 합니다.
@@ -267,6 +268,7 @@ public class BoardController {
                         // 이미지 파일의 원래 파일 이름 가져오기
                         String originalFileName = image.getOriginalFilename();
 
+                        System.out.println(originalFileName);
                         // 이미지 파일의 확장자 추출
                         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 
@@ -277,7 +279,37 @@ public class BoardController {
                         Path filePath = Paths.get(uploadDir + File.separator + newFileName);
                         Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-                        voteService.updateVote(boardId, voteId.get(i), text,"/board/display?fileName=" + filePath.toString(), originalFileName);
+                        voteService.updateVote(boardId, voteId.get(i), text,
+                                "/board/display?fileName=" + filePath.toString(), originalFileName);
+
+                    } catch (IOException e) {
+                        // 이미지 저장 중 오류 발생 시 예외 처리
+                        e.printStackTrace();
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미지 저장 중 오류 발생");
+                    }
+                } else {
+                    try {
+                        // 이미지를 저장할 경로 설정
+                        String uploadDir = "/Users/pms327/Downloads/image"; // 이미지를 저장할 실제 경로로 변경해야 합니다.
+
+                        // 이미지 파일의 원래 파일 이름 가져오기
+                        String originalFileName = image.getOriginalFilename();
+
+                        System.out.println("새로운거 : " + originalFileName);
+                        // 이미지 파일의 확장자 추출
+                        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+
+                        // 새로운 파일 이름 생성
+                        String newFileName = UUID.randomUUID().toString() + fileExtension;
+
+                        // 이미지 파일 저장
+                        Path filePath = Paths.get(uploadDir + File.separator + newFileName);
+                        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                        int lastNum = voteService.getLastVoteNumber(boardId);
+                        System.out.println("마지막 항목의 번호 : " + lastNum);
+                        voteService.saveVote(boardId, lastNum + 1, text,
+                                "/board/display?fileName=" + filePath.toString(), originalFileName, 0L);
 
                     } catch (IOException e) {
                         // 이미지 저장 중 오류 발생 시 예외 처리
@@ -287,7 +319,6 @@ public class BoardController {
                 }
             }
         }
-
         return ResponseEntity.ok("투표 항목 저장 완료");
     }
 

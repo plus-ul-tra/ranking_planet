@@ -19,4 +19,7 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
     @Query("SELECT v FROM Vote v WHERE v.boardId = :boardId AND v.voteCount = (SELECT MAX(v2.voteCount) FROM Vote v2 WHERE v2.boardId = :boardId)")
     List<Vote> findVotesWithMaxCountByBoardId(Long boardId);
+
+    @Query("SELECT MAX(v.voteNumber) FROM Vote v WHERE v.boardId = :boardId")
+    Integer findLastVoteNumberByBoardId(@Param("boardId") Long boardId);
 }
